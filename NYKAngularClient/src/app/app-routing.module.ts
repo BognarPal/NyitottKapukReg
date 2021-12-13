@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DaysComponent } from './components/days/days.component';
-import { MenuComponent } from './components/menu/menu.component';
+import { 
+  DaysComponent,
+  RegistrationComponent,
+  MenuComponent } from './components';
 
 const routes: Routes = [
   {path: 'days', component: DaysComponent},
+  {path: 'registration', component: RegistrationComponent},
   {path: '', component: MenuComponent}
 ];
 

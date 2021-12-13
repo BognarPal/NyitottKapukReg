@@ -1,0 +1,40 @@
+table th:nth-child(1) {
+    width: 1rem;
+}
+
+table td:nth-child(1) {
+    text-align: center;
+}
+
+table td:nth-child(4) {
+    font-weight: bold;
+}
+
+.infopanel h1 {
+    font-weight:normal
+}
+
+.szemelyes {
+    background-color: #B7DEE8;
+    border: 2px solid #1a87ee;
+    border-radius: 10px;
+}
+
+.infopanel {
+    background-color: #99ff99b2;
+    border-radius: 10px;
+}
+
+
+.text-success {
+    color: #185e28 !important;
+}
+
+#divDatumok p {
+    font-size: 1.5rem;
+}
+
+#gomb button {
+    min-width: 10rem;
+    max-width: 15rem;
+}

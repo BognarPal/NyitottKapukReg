@@ -8,7 +8,8 @@ import {
   AppComponent,
   DaysComponent,
   MenuComponent,
-  ConfirmComponent
+  ConfirmComponent,
+  RegistrationComponent
 } from './components';
 import { 
   AuthInterceptor 
@@ -19,7 +20,8 @@ import {
     AppComponent,
     DaysComponent,
     MenuComponent,
-    ConfirmComponent
+    ConfirmComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
