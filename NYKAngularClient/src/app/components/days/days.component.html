@@ -1,25 +1,55 @@
 <div class="container">
-    <h1 class="mb-3">
+    <h1 class="mb-5 text-center">
         Napok definiálása
     </h1>
 
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th class="text-center"> <span class="btn btn-sm btn-primary px-2 px-5">Új</span> </th>
+                <th class="text-center"> <span class="btn btn-sm btn-primary px-2 px-5" (click)="new()">Új</span> </th>
                 <th class="text-center">Dátum</th>
                 <th class="text-center">Kapacitás</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let day of days">
+            <tr *ngIf="status.isNew" >
                 <td class="text-center">
-                    <span class="btn btn-sm btn-danger mx-1">Törlés</span> 
-                    <span class="btn btn-sm btn-warning mx-1">Módosítás</span> 
+                    <span class="btn btn-sm btn-success mx-1" (click)="saveNew()">Mentés</span> 
+                    <span class="btn btn-sm btn-danger mx-1" (click)="status.isNew = false">Mégsem</span> 
                 </td>
-                <td class="text-center">{{day.date | date: 'yyyy.MM.dd'}}</td>
-                <td class="text-center">{{day.maxVisitors}}</td>
+                <td class="text-center">
+                    <input type="date" name="date" [(ngModel)]="status.new.date">
+                </td>
+                <td class="text-center">
+                    <input type="number" name="maxVisitors" [(ngModel)]="status.new.maxVisitors"> 
+                </td>                
+            </tr>
+
+            <tr *ngFor="let day of days">
+                <td *ngIf="!status.isModify || day.id != status.modify.id" class="text-center">
+                    <span *ngIf="!status.isNew && !status.isModify" class="btn btn-sm btn-danger mx-1" (click)="deleteDay(day)">Törlés</span> 
+                    <span *ngIf="!status.isNew && !status.isModify" class="btn btn-sm btn-warning mx-1" (click)="modify(day)">Módosítás</span> 
+                </td>
+                <td *ngIf="day.id == status.modify.id" class="text-center">
+                    <span class="btn btn-sm btn-success mx-1" (click)="saveModify()">Mentés</span> 
+                    <span class="btn btn-sm btn-danger mx-1" (click)="cancelModify()">Mégsem</span> 
+                </td>
+
+                <td *ngIf="!status.isModify || day.id != status.modify.id" class="text-center">{{day.date | date: 'yyyy.MM.dd'}}</td>
+                <td *ngIf="!status.isModify || day.id != status.modify.id" class="text-center">{{day.maxVisitors}}</td>
+
+                <td *ngIf="day.id == status.modify.id" class="text-center">
+                    <input type="date" name="date" [(ngModel)]="status.modify.date">
+                </td>
+                <td *ngIf="day.id == status.modify.id" class="text-center">
+                    <input type="number" name="maxVisitors" [(ngModel)]="status.modify.maxVisitors"> 
+                </td>
             </tr>
         </tbody>
     </table>
+    <div *ngIf="errorText" class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+        {{errorText}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="errorText=''"></button>
+    </div>
+
 </div>

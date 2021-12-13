@@ -28,9 +28,11 @@ namespace NyitottKapukReg.WebAPI.Controllers
                    dbContext.Set<Day>().OrderBy(d => d.Date)
                             .Select(d => new
                                          {
+                                            id = d.Id,
                                             date = d.Date,
                                             shortDate = d.Date.ToString("yyyy.MM.dd"),
-                                            longDate = d.Date.ToString("yyyy MMMM dd.")
+                                            longDate = d.Date.ToString("yyyy MMMM dd."),
+                                            maxVisitors = d.MaxVisitors
                                          }
                                    )
                );
