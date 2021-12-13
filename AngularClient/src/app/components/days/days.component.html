@@ -1,0 +1,25 @@
+<div class="container">
+    <h1 class="mb-3">
+        Napok definiálása
+    </h1>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th class="text-center"> <span class="btn btn-sm btn-primary px-2 px-5">Új</span> </th>
+                <th class="text-center">Dátum</th>
+                <th class="text-center">Kapacitás</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let day of days">
+                <td class="text-center">
+                    <span class="btn btn-sm btn-danger mx-1">Törlés</span> 
+                    <span class="btn btn-sm btn-warning mx-1">Módosítás</span> 
+                </td>
+                <td class="text-center">{{day.date | date: 'yyyy.MM.dd'}}</td>
+                <td class="text-center">{{day.maxVisitors}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
