@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nyitott kapuk - lista</title>
+    <link rel="stylesheet" href="https://jedlik.eu/beiratkozas/jelentkezes/bootstrap.min.css">
+    <link rel="stylesheet" href="https://jedlik.eu/beiratkozas/jelentkezes/style.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container mt-3">
+        <div class="row mx-0">
+            <span class="btn btn-primary mr-3">2021.11.15</span>
+            <span class="btn btn-primary mr-3">2021.11.17</span>
+            <span class="btn btn-primary mr-3">2021.11.24</span>
+        </div>
+        <h1>Regisztráltak listája <span id="datum"></span></h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Létszám</th>
+                    <th>Email</th>
+                    <th>Kísérő neve</th>
+                    <th colspan="4">Tanulók</th>
+                </tr>
+                <tr id="csoport-1">
+                    <td id="fejlec-1" colspan="8" style="background-color: #eee; font-weight: bold; font-size: 1.2rem; text-align: left;">1-s csoport: összesen: 3 fő</td>
+                </tr>
+                <tr>
+                    <td><span class="btn btn-sm btn-danger py-0 cursor-pointer" onclick="torol(1)">Töröl</span></td>
+                    <td>3 fő</td>
+                    <td>teszt.elek@level.com</td>
+                    <td>Teszt Elek</td>
+                    <td>Teszt Pistike</td>
+                    <td>Teszt Katika</td>
+                    <td></td>
+                    <td></td>`;
+                </tr>
+
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalConfirm" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Megerősítés</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" onclick="closeModal()">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Biztosan törölni akarod?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeModal()">Nem</button>
+                    <button type="button" class="btn btn-danger" onclick="closeModal()">Igen</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="https://jedlik.eu/beiratkozas/jelentkezes/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://jedlik.eu/beiratkozas/jelentkezes/popper.min.js"></script>
+    <script src="https://jedlik.eu/beiratkozas/jelentkezes/bootstrap.min.js"></script>
+    <script>
+        function closeModal() {
+            document.querySelector('#modalConfirm').style.display = 'none';
+            document.querySelector('#modalConfirm').classList.remove('show');
+        }
+        function torol(id) {
+            deleteId = id;
+            document.querySelector('#modalConfirm').style.display = 'block';
+            document.querySelector('#modalConfirm').classList.add('show');
+        }
+    </script>
+</body>
+
+</html>

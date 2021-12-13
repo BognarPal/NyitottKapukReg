@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nyitott kapuk - regisztráció</title>
+    <link rel="stylesheet" href="https://jedlik.eu/beiratkozas/jelentkezes/bootstrap.min.css">
+    <link rel="stylesheet" href="https://jedlik.eu/beiratkozas/jelentkezes/style.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container mt-3">
+        <div class="jumbotron jumbotron-fluid py-4" style="background-color: #99ff99b2;border-radius: 10px;">
+            <div class="container">
+                <h1 class="display-4" style="font-weight:normal">Regisztráció</h1>
+                <p class="lead">a Győri SZC Jedlik Ányos Gépipari és Informatikai Technikum és Kollégium által
+                    szervezett Nyitott Kapuk Napjára (2021/2022 tanév)</p>
+                <hr class="my-2">
+
+                <p>
+                    Tisztelt Látogatók!
+                </p>
+                <p>
+                    A járványügyi helyzetre való tekintettel sajnos korlátozó intézkedéseket kell bevezetnünk. Limitálnunk kell az egyidőben az épületben tartózkodók számát, így a nyitott kapuk napjának látogatását előzetes regisztrációhoz kötjük. 
+                </p>
+                <p>
+                    A rendelkezésre álló kapacitásaink 192 látogató fogadására elegendők naponta. (tanuló + kísérő együttesen)
+                </p>
+                <p class="mb-0">
+                    Mindenki azzal segíthet a többieknek, ha betartja a következőket:
+                </p>
+                <ul>
+                    <li>Csak 8. évfolyamon tanuló gyermek jelentkezzen.</li>
+                    <li>Lehetőleg csak egy kísérő jelentkezzen. (Az is megoldás, ha több ismerős tanulót egy kísérő hoz el.)</li>
+                </ul>
+                <p class="font-weight-bold mb-0">
+                    A látogatás ideje alatt maszk viselése kötelező!
+                </p>
+            </div>
+        </div>
+
+
+        <div class="szemelyes" id="divDatumok">
+            <h3 class="mb-3">Dátumok:</h3>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <p style="font-size: 1.5rem;" class="mb-0">
+                        <strong>2021. november 15:</strong>
+                        <span id="regisztracio_1"> 
+                            szabad kapacitás: <span id="kapacitas_1">...</span> fő
+                            <button class="btn btn-primary ml-4">Regisztráció</button>
+                        </span>
+                    </p>
+                </div>
+            </div>
+            <hr class="my-1">
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <p style="font-size: 1.5rem;" class="mb-0 mt-3">
+                        <strong>2021. november 17:</strong>
+                        <span id="regisztracio_2"> 
+                            szabad kapacitás: <span id="kapacitas_2">...</span> fő
+                            <button class="btn btn-primary ml-4">Regisztráció</button>
+                        </span>
+                    </p>
+                </div>
+            </div>
+            <hr class="my-1">
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <p style="font-size: 1.5rem;" class="mb-0 mt-3">
+                        <strong>2021. november 24:</strong>
+                        <span id="regisztracio_3"> 
+                            szabad kapacitás: <span id="kapacitas_3">...</span> fő
+                            <button class="btn btn-primary ml-4">Regisztráció</button>
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div id="formRegisztracio" class="szemelyes">
+            <h3 class="mb-3">Regisztrációs adatok:</h3>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>Dátum:</label>
+                    <p style="font-size: 1.2rem;"><strong id="lblDatum">2021. november 15.</strong></p>
+                    <input type="hidden" name="datum" id="datum" value="2021-11-15">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="Email">E-mail cím:</label><span class="csillag">*</span>
+                    <input type="email" id="Email" class="form-control" placeholder="" name="Email" required="">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6 border border-secondary pt-2 pb-1 rounded-lg">
+                    <div class="position-absolute px-1" style="left: 0.5rem; top:-1rem; background-color: #B7DEE8;">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="kisero" name="kisero">
+                            <label class="custom-control-label" for="kisero">Kísérő</label>
+                        </div>
+                    </div>
+                    <label for="KiseroNeve">Kísérő neve:</label>
+                    <input type="text" id="KiseroNeve" class="form-control" placeholder="" name="KiseroNeve">
+                </div>
+                <div id="divTanulokSzama" class="form-group col-md-6 pt-2 pb-1">
+                    <div class="form-group">
+                        <label for="tanulokSzama">Tanulók száma:</label><span class="csillag">*</span>
+                        <select name="tanulokSzama" id="tanulokSzama" class="form-control" style="max-width: 10rem;">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div id="divTanuloNeve1" class="form-group col-md-6">
+                    <label for="TanuloNeve1">Tanuló neve:</label><span class="csillag">*</span>
+                    <input type="text" id="TanuloNeve1" class="form-control" placeholder="" name="TanuloNeve1">
+                </div>
+                <div id="divTanuloNeve2" class="form-group col-md-6">
+                    <label for="TanuloNeve2">Tanuló neve:</label><span class="csillag">*</span>
+                    <input type="text" id="TanuloNeve2" class="form-control" placeholder="" name="TanuloNeve2">
+                </div>
+                <div id="divTanuloNeve3" class="form-group col-md-6">
+                    <label for="TanuloNeve3">Tanuló neve:</label><span class="csillag">*</span>
+                    <input type="text" id="TanuloNeve3" class="form-control" placeholder="" name="TanuloNeve3">
+                </div>
+                <div id="divTanuloNeve4" class="form-group col-md-6">
+                    <label for="TanuloNeve4">Tanuló neve:</label><span class="csillag">*</span>
+                    <input type="text" id="TanuloNeve4" class="form-control" placeholder="" name="TanuloNeve4">
+                </div>
+            </div>
+
+
+            <div class="row" id="gomb">
+                <button class="btn btn-primary my-3 mx-auto"  style="min-width: 10rem;">Elküld</button>
+            </div>
+            <p class="text-danger font-weight-bold text-center" id="error">Hibaüzenet helye</p>
+
+        </div>
+
+        <div class="szemelyes border-success" id="divSikeresReg" style="background-color: #99ff99b2">
+            <h1 class="text-center text-success">Sikeres regisztráció</h1>
+            <h3 class="text-center text-success"></h3>
+        </div>
+
+
+        <p class="text-center">
+            <em><strong>
+                    A nyitott kapuk programot követően minden egyedi azonosításra szolgáló adatot törölni fogunk. Az
+                    önök által megadott adatokat harmadik fél számára nem adjuk tovább.
+                </strong></em>
+        </p>
+        <p class="text-center">Szükség esetén az iskola portáján igazolást adunk a megjelenőknek.</p>
+    </div>
+    <div class="container footer my-3">
+        <div class="row" style="border-top: 1px solid #ccc">
+            <div class="col py-2 text-right ">
+                <a href="https://jedlik.eu">www.jedlik.eu</a>
+            </div>
+        </div>
+    </div>
+    <script src="https://jedlik.eu/beiratkozas/jelentkezes/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://jedlik.eu/beiratkozas/jelentkezes/popper.min.js"></script>
+    <script src="https://jedlik.eu/beiratkozas/jelentkezes/bootstrap.min.js"></script>
+    <!-- <script src="nyitottkapuk.js"></script> -->
+</body>
+
+</html>
