@@ -3,11 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { 
   DaysComponent,
   RegistrationComponent,
-  MenuComponent } from './components';
+  MenuComponent,
+  RegistrationListComponent 
+} from './components';
 
 const routes: Routes = [
   {path: 'days', component: DaysComponent},
   {path: 'registration', component: RegistrationComponent},
+  {path: 'registration-list', component: RegistrationListComponent},
   {path: '', component: MenuComponent}
 ];
 

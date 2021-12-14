@@ -30,12 +30,12 @@ namespace NyitottKapukReg.Service.Models
         public int CountOfVisitors()
         {
             int count = 0;
-            count += string.IsNullOrWhiteSpace(ParentName1) ? 1 : 0;
-            count += string.IsNullOrWhiteSpace(ParentName2) ? 1 : 0;
-            count += string.IsNullOrWhiteSpace(StudentName1) ? 1 : 0;
-            count += string.IsNullOrWhiteSpace(StudentName2) ? 1 : 0;
-            count += string.IsNullOrWhiteSpace(StudentName3) ? 1 : 0;
-            count += string.IsNullOrWhiteSpace(StudentName4) ? 1 : 0;
+            count += !string.IsNullOrWhiteSpace(ParentName1) ? 1 : 0;
+            count += !string.IsNullOrWhiteSpace(ParentName2) ? 1 : 0;
+            count += !string.IsNullOrWhiteSpace(StudentName1) ? 1 : 0;
+            count += !string.IsNullOrWhiteSpace(StudentName2) ? 1 : 0;
+            count += !string.IsNullOrWhiteSpace(StudentName3) ? 1 : 0;
+            count += !string.IsNullOrWhiteSpace(StudentName4) ? 1 : 0;
             return count;
         }
 

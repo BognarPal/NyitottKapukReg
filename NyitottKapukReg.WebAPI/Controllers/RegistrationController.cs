@@ -70,13 +70,15 @@ namespace NyitottKapukReg.WebAPI.Controllers
                                         .Include(r => r.Day)
                                         .Include(r => r.VisitorGroup)
                                         .Where(r => r.Day.Date == date)
+                                        .ToList()
                                         .Select(r => new
                                         {
                                             id = r.Id,
                                             groupNumber = r.VisitorGroup.GroupNumber,
                                             email = r.Email,
                                             parents = r.Parents,
-                                            students = r.Students
+                                            students = r.Students,
+                                            countOfVisitors = r.CountOfVisitors()
                                         })
                                         .OrderBy(r => r.groupNumber).ThenBy(r => r.id);
                 var result = new List<dynamic>();
@@ -85,13 +87,15 @@ namespace NyitottKapukReg.WebAPI.Controllers
                     result.Add(new
                     {
                         groupNumber = i,
+                        countOfVisitors = visitors.Where(v => v.groupNumber == i).Sum(v => v.countOfVisitors),
                         visitors = visitors.Where(v => v.groupNumber == i)
                                            .Select(v => new
                                            {
                                                v.id,
                                                v.email,
                                                v.parents,
-                                               v.students
+                                               v.students,
+                                               v.countOfVisitors
                                            })
                                            .ToArray()
                     });

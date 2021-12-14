@@ -9,7 +9,8 @@ import {
   DaysComponent,
   MenuComponent,
   ConfirmComponent,
-  RegistrationComponent
+  RegistrationComponent,
+  RegistrationListComponent
 } from './components';
 import { 
   AuthInterceptor 
@@ -21,7 +22,8 @@ import {
     DaysComponent,
     MenuComponent,
     ConfirmComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    RegistrationListComponent
   ],
   imports: [
     BrowserModule,
