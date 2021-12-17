@@ -32,74 +32,53 @@
         </div>
     </div>
 
-
-    <div class="szemelyes p-3 mb-3" id="divDatumok">
+    <div *ngIf="!status.selectedDate" class="szemelyes p-3 mb-3" id="divDatumok">
         <h3 class="mb-3">Dátumok:</h3>
-        <div class="row">
+        <div *ngFor="let day of days" class="row">
             <div class="col-md-12">
                 <p class="mb-0">
-                    <strong>2021. november 15:</strong>
-                    <span id="regisztracio_1">
-                        szabad kapacitás: <span id="kapacitas_1">...</span> fő
-                        <button class="btn btn-primary ms-4">Regisztráció</button>
-                    </span>
-                </p>
-            </div>
-        </div>
-        <hr class="my-1">
-        <div class="row">
-            <div class="col-md-12">
-                <p class="mb-0 mt-3">
-                    <strong>2021. november 17:</strong>
-                    <span id="regisztracio_2">
-                        szabad kapacitás: <span id="kapacitas_2">...</span> fő
-                        <button class="btn btn-primary ms-4">Regisztráció</button>
-                    </span>
-                </p>
-            </div>
-        </div>
-        <hr class="my-1">
-        <div class="row">
-            <div class="col-md-12">
-                <p class="mb-0 mt-3">
-                    <strong>2021. november 24:</strong>
-                    <span id="regisztracio_3">
-                        szabad kapacitás: <span id="kapacitas_3">...</span> fő
-                        <button class="btn btn-primary ms-4">Regisztráció</button>
+                    <strong>{{day.date | date: 'yyyy.MM.dd'}}:</strong>
+                    <span>
+                        szabad kapacitás: <span> {{'TODO'}} </span> fő
+                        <button class="btn btn-primary ms-4" (click)="regisztracio(day)">Regisztráció</button>
                     </span>
                 </p>
             </div>
         </div>
     </div>
 
-    <div id="formRegisztracio" class="szemelyes p-3 mb-3">
+    <div *ngIf="status.selectedDate && !status.registrationSucceeded" id="formRegisztracio" class="szemelyes p-3 mb-3">
         <h3 class="mb-3">Regisztrációs adatok:</h3>
         <div class="row">
             <div class="col-md-6">
                 <label>Dátum:</label>
-                <p style="font-size: 1.2rem;"><strong id="lblDatum">2021. november 15.</strong></p>
+                <p style="font-size: 1.2rem;"><strong>{{status.selectedDate}}</strong></p>
                 <input type="hidden" name="datum" id="datum" value="2021-11-15">
             </div>
             <div class="col-md-6">
                 <label for="Email">E-mail cím:</label><span class="csillag">*</span>
-                <input type="email" id="Email" class="form-control" placeholder="" name="Email" required="">
+                <input type="email" class="form-control" placeholder="" name="Email" required="" 
+                       [(ngModel)]="registration.email">
             </div>
         </div>
         <div class="row">
             <div class="col-md-6 border border-secondary pt-2 pb-1 rounded-lg position-relative">
                 <div class="position-absolute px-1" style="left: 0.5rem; top:-0.9rem; background-color: #B7DEE8;">
                     <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="kisero" name="kisero">
+                        <input type="checkbox" class="custom-control-input" id="kisero" name="kisero" 
+                               (click)="parentNameChecked($event)">
                         <label class="custom-control-label ms-1" for="kisero">Kísérő</label>
                     </div>
                 </div>
                 <label for="KiseroNeve">Kísérő neve:</label>
-                <input type="text" id="KiseroNeve" class="form-control" placeholder="" name="KiseroNeve">
+                <input type="text" class="form-control" placeholder="" id="KiseroNeve" name="KiseroNeve" 
+                       [(ngModel)]="registration.parentName1" [disabled]="!registration.parent1Checked">
             </div>
             <div id="divTanulokSzama" class="form-group col-md-6 pt-2 pb-1">
                 <div class="form-group">
                     <label for="tanulokSzama">Tanulók száma:</label><span class="csillag">*</span>
-                    <select name="tanulokSzama" id="tanulokSzama" class="form-control" style="max-width: 10rem;">
+                    <select id="tanulokSzama" class="form-control" style="max-width: 10rem;" 
+                            (change)="studentsCountChanged()" [(ngModel)]="registration.numberOfStudents">
                         <option value="0">0</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -112,33 +91,37 @@
         </div>
 
         <div class="row">
-            <div id="divTanuloNeve1" class="col-md-6">
+            <div id="divTanuloNeve1" class="col-md-6" *ngIf="registration.numberOfStudents > 0">
                 <label for="TanuloNeve1">Tanuló neve:</label><span class="csillag">*</span>
-                <input type="text" id="TanuloNeve1" class="form-control" placeholder="" name="TanuloNeve1">
+                <input type="text" id="TanuloNeve1" class="form-control" placeholder="" name="TanuloNeve1"
+                       [(ngModel)]="registration.studentName1">
             </div>
-            <div id="divTanuloNeve2" class="col-md-6">
+            <div id="divTanuloNeve2" class="col-md-6" *ngIf="registration.numberOfStudents > 1">
                 <label for="TanuloNeve2">Tanuló neve:</label><span class="csillag">*</span>
-                <input type="text" id="TanuloNeve2" class="form-control" placeholder="" name="TanuloNeve2">
+                <input type="text" id="TanuloNeve2" class="form-control" placeholder="" name="TanuloNeve2"
+                       [(ngModel)]="registration.studentName2">
             </div>
-            <div id="divTanuloNeve3" class="col-md-6">
+            <div id="divTanuloNeve3" class="col-md-6" *ngIf="registration.numberOfStudents > 2">
                 <label for="TanuloNeve3">Tanuló neve:</label><span class="csillag">*</span>
-                <input type="text" id="TanuloNeve3" class="form-control" placeholder="" name="TanuloNeve3">
+                <input type="text" id="TanuloNeve3" class="form-control" placeholder="" name="TanuloNeve3"
+                       [(ngModel)]="registration.studentName3">
             </div>
-            <div id="divTanuloNeve4" class="col-md-6">
+            <div id="divTanuloNeve4" class="col-md-6" *ngIf="registration.numberOfStudents > 3">
                 <label for="TanuloNeve4">Tanuló neve:</label><span class="csillag">*</span>
-                <input type="text" id="TanuloNeve4" class="form-control" placeholder="" name="TanuloNeve4">
+                <input type="text" id="TanuloNeve4" class="form-control" placeholder="" name="TanuloNeve4"
+                       [(ngModel)]="registration.studentName4">
             </div>
         </div>
 
 
         <div class="row" id="gomb">
-            <button class="btn btn-primary my-3 mx-auto" >Elküld</button>
+            <button class="btn btn-primary my-3 mx-auto" (click)="send()">Elküld</button>
         </div>
-        <p class="text-danger font-weight-bold text-center" id="error">Hibaüzenet helye</p>
+        <p class="text-danger font-weight-bold text-center" id="error">{{errorMessage}}</p>
 
     </div>
 
-    <div class="infopanel szemelyes border-success " id="divSikeresReg">
+    <div *ngIf="status.registrationSucceeded" class="infopanel szemelyes border-success " id="divSikeresReg">
         <h1 class="text-center text-success">Sikeres regisztráció</h1>
         <h3 class="text-center text-success"></h3>
     </div>

@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Jedlik.eDoc\Jedlik.eDoc.csproj" />
     <ProjectReference Include="..\NyitottKapukReg.Service\NyitottKapukReg.Service.csproj" />
   </ItemGroup>
 

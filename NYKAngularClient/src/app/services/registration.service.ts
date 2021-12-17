@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { RegistrationListModel } from '../models';
+import { RegistrationModel } from '../models/registration.model';
 
 @Injectable({
   providedIn: 'root'
@@ -22,5 +23,9 @@ export class RegistrationService {
             throw err;
         })
       );
+  }
+
+  send(model: RegistrationModel): Observable<any> {
+    return this.http.put<any>(`${environment.ApiURL}/registration`, model);
   }
 }

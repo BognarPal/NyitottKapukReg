@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using NyitottKapukReg.Service;
 using NyitottKapukReg.Service.Models;
 using System;
@@ -39,6 +40,53 @@ namespace NyitottKapukReg.WebAPI.Controllers
            });
         }
 
-        //TODO: hozzon létre újabb függvényeket: CRUD
+        [HttpPut]
+        public ActionResult New(Day model)
+        {
+            return this.Run(() =>
+            {
+                dbContext.Set<Day>().Add(model);
+                dbContext.SaveChanges();
+
+                return Ok(model);
+            });
+        }
+
+        [HttpPost]
+        public ActionResult Modify(Day model)
+        {
+            return this.Run(() =>
+            {
+                dbContext.Entry(model).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                dbContext.SaveChanges();
+
+                return Ok(model);
+            });
+        }
+
+        [HttpDelete]
+        public ActionResult Delete(Day model)
+        {
+            return this.Run(() =>
+            {
+                var exists = dbContext.Set<Registration>()
+                                      .Include(r => r.Day)
+                                      .Any(r => r.Day.Id == model.Id);
+                if (exists)
+                {
+                    return StatusCode(500, new
+                    {
+                        ErrorMessage = "A törlendő napra már van regisztráció"
+                    });
+                }
+                else
+                {
+                    dbContext.Remove(model);
+                    dbContext.SaveChanges();
+
+                    return Ok(model);
+                }
+            });
+        }
     }
 }

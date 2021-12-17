@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Jedlik.eDoc;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NyitottKapukReg.Service;
@@ -6,6 +7,7 @@ using NyitottKapukReg.Service.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace NyitottKapukReg.WebAPI.Controllers
@@ -204,15 +206,26 @@ namespace NyitottKapukReg.WebAPI.Controllers
                 dbContext.Set<Registration>().Add(registration);
                 dbContext.SaveChanges();
 
+                var qrData = new
+                {
+                    id = registration.Id,
+                    email = registration.Email,
+                    name = string.IsNullOrEmpty(registration.Parents) ? registration.StudentName1 : registration.ParentName1,
+                    count = registration.CountOfVisitors()
+                };
+
                 return Ok(new
                 {
                     groupNumber = visitorGroup.GroupNumber,
                     classRoom = visitorGroup.ClassroomNumber,
                     date = registration.Day.Date.ToString("yyyy.MM.dd"),
-                    password = registration.Password
+                    password = registration.Password,
+                    qrCode = QRCode.GenerateAsBase64(JsonSerializer.Serialize(qrData))
                 });
             });
         }
+
+        
 
         [HttpPost]
         public ActionResult Modify(Registration registration)
